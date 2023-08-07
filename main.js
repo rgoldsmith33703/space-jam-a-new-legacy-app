@@ -1,15 +1,16 @@
 // A map of playerName to an array of playerPER values
 let playerMap = new Map()
 
+// Variables to keep track of constants 
 const maxPlayersOnCourt = 5
 const numQuarters = 4
-// Variables to keep track of constants 
 
+// Variables to track state throughout the game
 let currentQuarter = 0
 let playersOnCourt = 0
 let quarterInPlay = false
 
-// Variables to track state throughout the game
+// Variables to track the PER throughout the game
 let quarterPER = 0
 let quarterAvePER = 0
 let totalAvePER = 0
@@ -18,9 +19,7 @@ let totalAvePER = 0
 
 
 function processPlayers(allPlayerStats) {
-// Variables to track the PER throughout the game
-
-// Split the data by newline into an array
+    // Split the data by newline into an array
     let allPlayerStatLines = allPlayerStats.split(/\r\n|\n/)
 
     // Remove the header line (first line)
@@ -49,7 +48,7 @@ function processPlayers(allPlayerStats) {
     }
 
     // Add the players to the bench
-    displayPlayerBench()
+    displayPlayerBench(playerMap)
 
 }
 

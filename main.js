@@ -1,86 +1,89 @@
 // A map of playerName to an array of playerPER values
+let playerMap = new Map()
 
-
+const maxPlayersOnCourt = 5
+const numQuarters = 4
 // Variables to keep track of constants 
 
-
+let currentQuarter = 0
+let playersOnCourt = 0
+let quarterInPlay = false
 
 // Variables to track state throughout the game
+let quarterPER = 0
+let quarterAvePER = 0
+let totalAvePER = 0
 
 
 
 
+function processPlayers(allPlayerStats) {
 // Variables to track the PER throughout the game
 
-
-
-
-// Function to read in all of the player stats
-function processPlayers(allPlayerStats) {
-    // Split the data by newline into an array.
-
+// Split the data by newline into an array
+    let allPlayerStatLines = allPlayerStats.split(/\r\n|\n/)
 
     // Remove the header line (first line)
-
+    allPlayerStatLines.shift()
 
     // Loop through the rows and create a map entry of player name to a list of player PER
-
+    for (let statLine in allPlayerStatLines) {
         // Get all individual stat values
-
-
+        let stats = statLine.split(',')
         // If it's just an empty line, skip it
-
+        if (!stats || stats.length <= 1) continue; //empty line
 
         // The second column has the player name
-
+        let playerName = stats[1]
 
         // Check if player exists in map
-
+        if (!playerMap.has(playerName)) {
             // First time we see the player; Add them in!
+            playerMap.set(playerName, [])
+        }
 
-
-
-        // Get per value for player
-
+        let per = parseFloat(stats[9])
 
         // Add per value to player's array (the next quarter)
+        playerMap.get(playerName).push(per)
+    }
 
-
-    // Add the players to the bench.
+    // Add the players to the bench
+    displayPlayerBench()
 
 }
 
 // Function to add the players to the bench to start the game
 function displayPlayerBench() {
     // Get the bench div in which the players will be shown.
-
+    let bench = document.getElementById('playersOnBench')
 
     // For each player, create a button 
-
+    for (let playerName of playerMap.keys()) {
         // Create a button for each player
-
+        let newPlayer = document.createElement('button')
 
         // Set the ID to the name of the player so we can get it later
-
+        newPlayer.id = playerName
 
         // Identify the style class, which will set the color scheme
-
+        newPlayer.className = 'playerButton'
 
         // When the button is clicked, call the movePlayer function
-
+        newPlayer.onclick = movePlayer
 
         // Add the players image to the button
-
+        let playerImage = document.createElement('img')
 
         // Set the source (or location) of the image
-
+        playerImage.src = 'images/'+playerName+'.png'
 
         // Add the image to the button
-
+        newPlayer.appendChild(playerImage)
 
         // Add the button to the bench
-
-
+        bench.appendChild(newPlayer)
+    }
 
     // Display cards for all players
 

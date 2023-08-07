@@ -53,7 +53,7 @@ function processPlayers(allPlayerStats) {
 }
 
 // Function to add the players to the bench to start the game
-function displayPlayerBench() {
+function displayPlayerBench(playerMap) {
     // Get the bench div in which the players will be shown.
     let bench = document.getElementById('playersOnBench')
 

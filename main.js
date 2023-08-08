@@ -48,12 +48,12 @@ function processPlayers(allPlayerStats) {
     }
 
     // Add the players to the bench
-    displayPlayerBench(playerMap)
+    displayPlayerBench()
 
 }
 
 // Function to add the players to the bench to start the game
-function displayPlayerBench(playerMap) {
+function displayPlayerBench() {
     // Get the bench div in which the players will be shown.
     let bench = document.getElementById('playersOnBench')
 
@@ -75,7 +75,8 @@ function displayPlayerBench(playerMap) {
         let playerImage = document.createElement('img')
 
         // Set the source (or location) of the image
-        playerImage.src = 'images/'+playerName+'.png'
+        
+        playerImage.src = `images\\${playerName}.png`
 
         // Add the image to the button
         newPlayer.appendChild(playerImage)
@@ -85,7 +86,7 @@ function displayPlayerBench(playerMap) {
     }
 
     // Display cards for all players
-
+    displayPlayerCards();
 }
 
 // This function is called at the beginning of the game play to initialize
